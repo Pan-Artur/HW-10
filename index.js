@@ -1,17 +1,23 @@
 //Task 1
 
-const showMessage = (message) => alert(message);
-
 const createMessage = () => "Hello world!";
 
-showMessage(createMessage());
+const showMessage = (callback) => {
+  const message = callback();
+  alert(message);
+};
+
+showMessage(createMessage);
 
 //Task 2
 
 const max = 100;
 const min = 1;
 
+const randomNumber = Math.round(Math.random() * (max - min) + min);
 const userNumber = prompt("Вгадайте число, яке було випадково згенерованим:");
+
+const chooseNumber = (userNumber, randomNumber, callback) => callback(userNumber, randomNumber);
 
 const checkNumber = (userNumber, randomNumber) => {
     let numberMessage;
@@ -19,17 +25,13 @@ const checkNumber = (userNumber, randomNumber) => {
     if (userNumber === randomNumber) {
         numberMessage = alert("Так, ви вгадали!");
     } else {
-        if (userNumber !== randomNumber) {
-            numberMessage = alert("Не правильно, ви не вгадали!");
-        } 
+        numberMessage = alert("Не правильно, ви не вгадали!");
     }
 
     return numberMessage;
 };
 
-const chooseNumber = (max, min) => Math.round(Math.random() * (max - min) + min);
-
-chooseNumber(checkNumber(userNumber));
+chooseNumber(userNumber, randomNumber, checkNumber);
 
 //Task 3
 
